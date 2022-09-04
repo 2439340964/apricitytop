@@ -1,0 +1,129 @@
+/* 公共css类型名 */
+/* html {
+    font-size: calc(100vw * 100 / 375);
+} */
+
+body {
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  font-family: MiSans-Medium;
+  /* overflow: overlay; */
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-top {
+  align-items: flex-start;
+}
+
+.flex-left {
+  justify-content: flex-start;
+}
+
+.flex-right {
+  justify-content: flex-end;
+}
+
+/* .el-row{
+  margin: 0 !important;
+} */
+
+/* 修改滚动条 */
+/* ::-webkit-scrollbar {
+  background-color: transparent;
+  padding: 0 2px;
+} */
+
+/* ::-webkit-scrollbar-thumb {
+  background-color: #818181;
+  background-color: #c1c1c1;
+  margin: 0 2px;
+  border-radius: 8px;
+  border: 4px solid transparent;
+  background-clip: content-box;
+} */
+
+.text-white {
+  color: #fff !important;
+}
+
+.btn {
+  user-select: none;
+}
+
+a {
+  color: #000;
+}
+
+.active {
+  color: #000 !important;
+}
+
+@font-face {
+  font-family: MiSans-Medium;
+  src: url('@/assets/font/MiSans-Medium.ttf');
+}
+
+a:link {
+  text-decoration: none;
+}
+
+/* 指正常的未被访问过的链接*/
+a:visited {
+  text-decoration: none;
+}
+
+/*指已经访问过的链接*/
+a:hover {
+  text-decoration: none;
+}
+
+/*指鼠标在链接*/
+a:active {
+  text-decoration: none;
+}
+
+/* 指正在点的链接*/
+
+
+/* 初始化 */
+body, h1, h2, h3, h4, h5, h6, ol, ul, dl, li, dd, dt, input, table, tr, p, th, td, textarea, form {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+textarea {
+  /* 多行输入大小不能拖拽 */
+  resize: 0;
+}
+
+ol, ul {
+  list-style-type: none;
+}
