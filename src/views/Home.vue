@@ -68,7 +68,7 @@
         <el-col :span="24">
             <div class="foot-bot">
                 © 2022 Copyrights reserved
-                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">陕ICP备2022010215号</a>
+                <a href="https://beian.miit.gov.cn" target="_blank">陕ICP备2022010215号</a>
                 版权所有：xiaoxiao <br>
             </div>
         </el-col>
@@ -89,10 +89,12 @@ const handleSelect = (key, keyPath) => {
 
 // 小屏点击三个点
 const menuDrawer = ref(false);
+
 </script>
+
 <style>
 body {
-    background: url("@/assets/img/shulan.jpg") no-repeat;
+    background: url("@/assets/img/laohu.jpg") no-repeat;
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -154,6 +156,7 @@ body {
         height: 500px;
         font-size: 36px;
         flex-direction: column;
+        text-shadow: 0 0 10px #000;
     }
 }
 
