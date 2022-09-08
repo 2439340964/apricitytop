@@ -7,12 +7,12 @@
                 <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                     <!-- 手机屏 -->
                     <div class="logo-a flex flex-left hidden-sm-and-up">
-                        <img src="@/assets/img/logo.png" alt="" class="logoimg">
+                        <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg">
                         <div class="authorName">xiaoxiao</div>
                     </div>
                     <!-- 大屏 -->
                     <div class="logo-b flex flex-left hidden-xs-only">
-                        <img src="@/assets/img/logo.png" alt="" class="logoimg">
+                        <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg">
                         <div class="authorName">xiaoxiao</div>
                     </div>
                 </el-col>
@@ -78,17 +78,29 @@
 <script setup>
 // 栅格隐藏显示css
 import 'element-plus/theme-chalk/display.css'
-
+// 解构ref
 import { ref } from 'vue'
+// 解构路由
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
-// 导航菜单
+
+// 点击导航菜单
 const activeIndex = ref('1')
 const handleSelect = (key, keyPath) => {
     console.log(key, keyPath)
 }
 
-// 小屏点击三个点
+// 小屏点击三个点进行显示
 const menuDrawer = ref(false);
+
+
+// 点击logo跳转主页
+function linkHome() {
+    // router.push({
+    //     name: 'home'
+    // })
+}
 
 </script>
 
@@ -152,6 +164,8 @@ body {
         }
     }
 
+
+    // 内容
     .content {
         height: 500px;
         font-size: 36px;
@@ -167,6 +181,7 @@ body {
     }
 }
 
+// 页尾脚部
 .foot-bot {
     box-sizing: content-box;
     outline: 0;
