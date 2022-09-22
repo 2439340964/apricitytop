@@ -7,7 +7,7 @@
         <div class="wraps">
             <!-- logo -->
             <div class="header">
-                <el-row :gutter="10">
+                <el-row :gutter="10" style="align-items: center">
                     <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                         <!-- 手机屏 -->
                         <div class="logo-a flex flex-left hidden-sm-and-up">
@@ -23,16 +23,32 @@
                     <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
                         <!-- 手机屏 -->
                         <div class="menuHide-a flex flex-right hidden-sm-and-up">
-                            <el-icon :size="24" @click="menuDrawer = true">
-                                <MoreFilled />
-                            </el-icon>
+
+                            <el-dropdown @command="commandMenuHide" trigger="click">
+                                <span class="el-dropdown-link">
+                                    <!-- @click="menuDrawer = true" -->
+                                    <el-icon :size="24">
+                                        <MoreFilled />
+                                    </el-icon>
+                                </span>
+                                <template #dropdown>
+                                    <el-dropdown-menu>
+                                        <el-dropdown-item :command="0">首页</el-dropdown-item>
+                                        <el-dropdown-item :command="1">关于</el-dropdown-item>
+                                        <el-dropdown-item :command="2">作品</el-dropdown-item>
+                                        <el-dropdown-item :command="3">日志</el-dropdown-item>
+                                        <el-dropdown-item :command="4" divided>相册</el-dropdown-item>
+                                    </el-dropdown-menu>
+                                </template>
+                            </el-dropdown>
+
                         </div>
                         <!-- 大屏 -->
                         <div class="menuHide-b flex flex-right hidden-xs-only">
                             <el-menu :default-active="activeIndex" class="el-menu-demo" router mode="horizontal"
                                 @select="handleSelect" :ellipsis="false" background-color="transparent"
                                 active-text-color="#70C000" text-color="#fff">
-                                <el-menu-item index="/photo">首页</el-menu-item>
+                                <el-menu-item index="/home">首页</el-menu-item>
                                 <el-menu-item index="/photo">关于</el-menu-item>
                                 <el-menu-item index="/photo">作品</el-menu-item>
                                 <el-menu-item index="/photo">日志</el-menu-item>
@@ -52,7 +68,7 @@
 
         <!-- 三点隐藏菜单 -->
         <div class="menuDrawer">
-            <el-drawer v-model="menuDrawer" :with-header="false" size="60%">
+            <!-- <el-drawer v-model="menuDrawer" :with-header="false" size="60%">
                 <el-menu :default-active="activeIndex" class="el-menu-demo" router mode="vertical"
                     @select="handleSelect" :ellipsis="false" active-text-color="#70C000">
                     <el-menu-item index="/photo">首页</el-menu-item>
@@ -61,15 +77,16 @@
                     <el-menu-item index="/photo">日志</el-menu-item>
                     <el-menu-item index="/photo">相册</el-menu-item>
                 </el-menu>
-            </el-drawer>
+            </el-drawer> -->
         </div>
 
         <!-- 底部导航 -->
         <el-row>
             <el-col :span="24">
-                <div class="foot-bot">
+                <div class="foot-bot flex-center">
                     © 2022 Copyrights reserved
-                    <el-link href="https://beian.miit.gov.cn" :underline="false" target="_blank">陕ICP备2022010215号
+                    <el-link href="https://beian.miit.gov.cn" :underline="false" target="_blank">
+                        &nbsp;陕ICP备2022010215号&nbsp;
                     </el-link>
                     版权所有：xiaoxiao <br>
                 </div>
@@ -95,18 +112,27 @@ const bodyBg = ref("@/assets/img/laohu.jpg");
 // 点击导航菜单
 const activeIndex = ref('1')
 const handleSelect = (key, keyPath) => {
-    console.log(key, keyPath)
+    // console.log(key, keyPath)
 }
 
 // 小屏点击三个点进行显示
 const menuDrawer = ref(false);
 
+// 点击隐藏三个点的列表跳转 
+const commandMenuHide = (data) => {
+    let a = ["home", "photo", "photo", "photo", "photo"]
+    if (!a[data]) return
+    router.push({
+        name: a[data]
+    })
+}
+
 
 // 点击logo跳转主页
-function linkHome() {
-    // router.push({
-    //     name: 'home'
-    // })
+const linkHome = () => {
+    router.push({
+        name: 'home'
+    })
 }
 
 </script>
@@ -162,6 +188,16 @@ function linkHome() {
             .menuHide-a {
                 height: 100%;
                 padding-right: 24px;
+
+                .el-dropdown-link {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+
+                    .el-icon {
+                        color: #fff;
+                    }
+                }
             }
 
             .menuHide-b {
@@ -176,20 +212,25 @@ function linkHome() {
                     background-color: transparent !important;
                     border-bottom: 2px solid #70C000 !important;
                 }
+
+                .el-menu-item {
+                    --el-menu-hover-bg-color: rgba(0, 0, 0, 0);
+                }
             }
         }
 
         // 内容
         .content {
-            height: 500px;
+            height: calc(100% - 74px);
             font-size: 36px;
             flex-direction: column;
-            text-shadow: 0 0 10px #000;
+            // text-shadow: 0 0 10px #000;
         }
     }
 
     // 三点隐藏菜单
     .menuDrawer {
+
         .el-menu {
             border: none;
         }
@@ -199,6 +240,10 @@ function linkHome() {
 
             .el-menu .el-menu-item:hover {
                 background-color: #fff;
+            }
+
+            .el-menu-item {
+                --el-menu-hover-bg-color: rgba(0, 0, 0, 0);
             }
         }
     }
@@ -213,6 +258,7 @@ function linkHome() {
         font-size: 12px;
         color: #ffffff4d;
         text-align: center;
+        flex-wrap: wrap;
 
         a {
             color: #ffffff4d;
