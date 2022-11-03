@@ -12,5 +12,10 @@ export default [
         path: '/photo',
         name: 'photo',
         component: () => import('@/views/Photo.vue'),
+    }, 
+    {
+        path: '/feelings',
+        name: 'feelings',
+        component: () => import('@/views/Feelings.vue'),
     }
 ]

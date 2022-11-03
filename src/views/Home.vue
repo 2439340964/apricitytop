@@ -11,19 +11,18 @@
                     <el-col :xs="8" :sm="8" :md="8" :lg="8" :xl="8">
                         <!-- 手机屏 -->
                         <div class="logo-a flex flex-left hidden-sm-and-up">
-                            <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg">
+                            <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg" />
                             <div class="authorName">xiaoxiao</div>
                         </div>
                         <!-- 大屏 -->
                         <div class="logo-b flex flex-left hidden-xs-only">
-                            <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg">
+                            <img @click="linkHome" src="@/assets/img/logo.png" alt="" class="logoimg" />
                             <div class="authorName">xiaoxiao</div>
                         </div>
                     </el-col>
                     <el-col :xs="16" :sm="16" :md="16" :lg="16" :xl="16">
                         <!-- 手机屏 -->
                         <div class="menuHide-a flex flex-right hidden-sm-and-up">
-
                             <el-dropdown @command="commandMenuHide" trigger="click">
                                 <span class="el-dropdown-link">
                                     <!-- @click="menuDrawer = true" -->
@@ -41,7 +40,6 @@
                                     </el-dropdown-menu>
                                 </template>
                             </el-dropdown>
-
                         </div>
                         <!-- 大屏 -->
                         <div class="menuHide-b flex flex-right hidden-xs-only">
@@ -56,13 +54,12 @@
                             </el-menu>
                         </div>
                     </el-col>
-
                 </el-row>
             </div>
 
             <div class="content flex flex-center">
-                <div>hello! ☀</div>
-                My name is zeMing
+                <div>{{ titleDes.title[0]}}</div>
+                {{titleDes.title[1]}}
             </div>
         </div>
 
@@ -88,52 +85,67 @@
                     <el-link href="https://beian.miit.gov.cn" :underline="false" target="_blank">
                         &nbsp;陕ICP备2022010215号&nbsp;
                     </el-link>
-                    版权所有：xiaoxiao <br>
+                    版权所有：xiaoxiao <br />
                 </div>
             </el-col>
         </el-row>
     </div>
-
 </template>
 
 <script setup>
 // 栅格隐藏显示css
-import 'element-plus/theme-chalk/display.css'
+import "element-plus/theme-chalk/display.css";
+// 挂载在全局的变量
+import useGetGlobalProperties from "@/utils/hooks.js";
 // 解构ref
-import { ref } from 'vue'
+import { ref, reactive, onMounted } from "vue";
 // 解构路由
-import { useRouter } from 'vue-router';
-const router = useRouter()
+import { useRouter } from "vue-router";
+// 请求
+import { HomeApi } from "@/api/Home";
+// 路由
+const router = useRouter();
+// 设备类型
+const equipment = ref(useGetGlobalProperties().$equipment)
 
 
 // body 背景
 const bodyBg = ref("@/assets/img/laohu.jpg");
 
 // 点击导航菜单
-const activeIndex = ref('1')
+const activeIndex = ref("1");
 const handleSelect = (key, keyPath) => {
     // console.log(key, keyPath)
-}
+};
 
 // 小屏点击三个点进行显示
 const menuDrawer = ref(false);
 
-// 点击隐藏三个点的列表跳转 
+// 点击隐藏三个点的列表跳转
 const commandMenuHide = (data) => {
-    let a = ["home", "photo", "photo", "photo", "photo"]
-    if (!a[data]) return
+    let a = ["home", "photo", "photo", "feelings", "photo"];
+    if (!a[data]) return;
     router.push({
-        name: a[data]
-    })
-}
-
+        name: a[data],
+    });
+};
 
 // 点击logo跳转主页
 const linkHome = () => {
     router.push({
-        name: 'home'
-    })
-}
+        name: "home",
+    });
+};
+
+// 首页加载动态数据显示
+let titleDes = reactive({
+    title: []
+});
+onMounted(async () => {
+    let res = await HomeApi();
+    titleDes.title = reactive(res.data.title);
+});
+
 
 </script>
 
@@ -210,7 +222,7 @@ const linkHome = () => {
 
                 .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
                     background-color: transparent !important;
-                    border-bottom: 2px solid #70C000 !important;
+                    border-bottom: 2px solid #70c000 !important;
                 }
 
                 .el-menu-item {
@@ -230,7 +242,6 @@ const linkHome = () => {
 
     // 三点隐藏菜单
     .menuDrawer {
-
         .el-menu {
             border: none;
         }
@@ -265,14 +276,12 @@ const linkHome = () => {
         }
 
         a:hover {
-            color: #fff
+            color: #fff;
         }
 
         .el-link {
             font-size: 12px !important;
-
         }
-
     }
 }
 </style>
