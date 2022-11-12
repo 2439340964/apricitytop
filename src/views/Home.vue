@@ -47,10 +47,10 @@
                                 @select="handleSelect" :ellipsis="false" background-color="transparent"
                                 active-text-color="#70C000" text-color="#fff">
                                 <el-menu-item index="/home">首页</el-menu-item>
-                                <el-menu-item index="/photo">关于</el-menu-item>
-                                <el-menu-item index="/photo">作品</el-menu-item>
-                                <el-menu-item index="/photo">日志</el-menu-item>
-                                <el-menu-item index="/photo">相册</el-menu-item>
+                                <el-menu-item index="/none">关于</el-menu-item>
+                                <el-menu-item index="/none">作品</el-menu-item>
+                                <el-menu-item index="/none">日志</el-menu-item>
+                                <el-menu-item index="/none">相册</el-menu-item>
                             </el-menu>
                         </div>
                     </el-col>
@@ -58,8 +58,8 @@
             </div>
 
             <div class="content flex flex-center">
-                <div>{{ titleDes.title[0]}}</div>
-                {{titleDes.title[1]}}
+                <div>{{ titleDes.title[0] }}</div>
+                {{ titleDes.title[1] }}
             </div>
         </div>
 
@@ -123,7 +123,7 @@ const menuDrawer = ref(false);
 
 // 点击隐藏三个点的列表跳转
 const commandMenuHide = (data) => {
-    let a = ["home", "photo", "photo", "feelings", "photo"];
+    let a = ["home", "none", "none", "feelings", "photo"];
     if (!a[data]) return;
     router.push({
         name: a[data],
