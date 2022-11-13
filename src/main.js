@@ -2,11 +2,15 @@ import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
 import router from './router/index'
+// 导入store
+import store from './store'
 // element
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 // 如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
+// 封装的路由拦截
+import routerIntercept from './utils/routerIntercept'
 
 // 挂载
 // createApp(App).use(router).use(ElementPlus).mount('#app')
@@ -16,7 +20,7 @@ const app = createApp(App)
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }
-app.use(router).use(ElementPlus).mount('#app')
+app.use(router).use(store).use(ElementPlus).mount('#app')
 
 // 全局挂载的判断设备类型的变量
 const flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) ? true : false;

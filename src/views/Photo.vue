@@ -2,13 +2,13 @@
     <div class="photo flex-center">
         <!-- 骨架屏 -->
         <div v-if="noenShow" class="none flex-center">
-            <el-empty description="暂无更多..." />
+            <el-empty description="稍等一下啦..." />
         </div>
 
         <!-- 内容 -->
         <div v-else class="content">
             <!-- 轮播 -->
-            <el-carousel class="carousel" trigger="click" height="250px" indicator-position="outside">
+            <el-carousel class="carousel" autoplay :interval="2500" :height="carouselHeight + 'px'" arrow="never">
                 <el-carousel-item v-for="item in carouselList" :key="item">
                     <img :src="item" alt="">
                 </el-carousel-item>
@@ -31,25 +31,25 @@ import { PhotoApi } from "@/api/Photo.js";
 
 // 控制骨架屏
 let noenShow = ref(true);
-// 轮播图
+// 轮播图列表
 let carouselList = ref([]);
-
-let timer = setTimeout(() => {
-    noenShow.value = false;
-}, 500)
+// 轮播图高度
+let carouselHeight = ref(260);
+let a = reactive([])
 
 onMounted(async () => {
     let res = await PhotoApi();
-    carouselList.value = res.data.photoList;
-});
-console.log(carouselList,);
+    if (res.status == 200) {
+        noenShow.value = false;
+        carouselList.value = res.data.photoList;
+        carouselHeight.value = res.data.height;
 
-// carouselList = [
-//     "https://apricityzm.top/apiphoto/upload/9d8089102fa955b0b2d9e0c240285928.jpeg",
-//     "https://apricityzm.top/apiphoto/upload/2e097c9c0248a34374174b665398ad08.png",
-//     "https://apricityzm.top/apiphoto/upload/6a353b13c40adf468d43b1e45effffdf.jpeg",
-//     "http://124.221.2.47:7000/upload/fdf76f2843eef788981f8189db5d28e3.jpeg"
-// ]
+
+        a.push(...res.data.photoList)
+    }
+});
+
+console.log(a);
 
 </script>
   
@@ -67,7 +67,7 @@ console.log(carouselList,);
         .carousel {
             img {
                 width: 100%;
-                height: 250px;
+                height: 100%;
                 object-fit: cover;
             }
         }
