@@ -17,7 +17,7 @@ export default [
         path: '/photo',
         name: 'photo',
         component: () => import('@/views/Photo.vue'),
-    }, 
+    },
     {
         path: '/none',
         name: 'none',
@@ -27,5 +27,10 @@ export default [
         path: '/feelings',
         name: 'feelings',
         component: () => import('@/views/Feelings.vue'),
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: 'error',
+        component: () => import('@/views/Error.vue')
     }
 ]

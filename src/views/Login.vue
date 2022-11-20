@@ -13,10 +13,10 @@
                 <div class="pass">
                     <div class="pass-top user-top">密码</div>
                     <el-input v-model="userInfo.pass" show-password class="userinput" type="password"
-                        placeholder="请输入密码" />
+                        placeholder="请输入密码" @change="loginClick"/>
                 </div>
                 <div class="loginbtn">
-                    <el-button @click="loginClick" round color="#626aef">登录</el-button>
+                    <el-button @click="loginClick" :loading="btnLoading" round color="#626aef">登录</el-button>
                 </div>
             </div>
         </div>
@@ -24,6 +24,8 @@
 </template>
 
 <script setup>
+// 通知组件
+import { ElMessage } from 'element-plus'
 // 解构ref
 import { ref, reactive, onMounted } from "vue";
 // 解构路由
@@ -39,14 +41,38 @@ const router = useRouter();
 const store = userStore();
 let { token } = storeToRefs(store)
 
-let userInfo = ref({
+// 用户输入的表单信息
+let userInfo = reactive({
     name: '',
     pass: ''
 })
+// 确定按钮的loading状态
+let btnLoading = ref(false)
 
 const loginClick = async () => {
-    let res = await LoginApi(userInfo.value)
-    console.log(res);
+    btnLoading.value = true;
+
+    if (userInfo.name == '' || userInfo.pass == '') {
+        let message = '';
+        let messageType = {
+            name: "请输入有效账号",
+            pass: "请输入有效密码"
+        }
+        message = userInfo.name == '' ? messageType.name : messageType.pass
+
+        ElMessage({
+            message,
+            type: 'warning',
+            center: true,
+        })
+
+        btnLoading.value = false
+        return;
+    }
+
+    let res = await LoginApi(userInfo)
+    res ? btnLoading.value = false : btnLoading.value = true;
+
     if (res.status == 200) {
         store.token = res.data.token
 
@@ -55,6 +81,15 @@ const loginClick = async () => {
             replace: true
         })
     }
+
+    if (res.status == 400) {
+        ElMessage({
+            message: '这是一个错误的账号或密码',
+            type: 'error',
+            center: true,
+        })
+    }
+
 }
 
 </script>
