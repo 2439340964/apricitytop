@@ -3,14 +3,14 @@ import { ElMessage } from "element-plus";
 import { isNavigationFailure } from 'vue-router'
 
 // 要拦截的路由
-const interceptList = ['/photo']
+const interceptList = ['photo']
 // 判断设备类型
 const flag = navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i) ? true : false;
 
 router.beforeEach((to, from) => {
     // console.log(failure);
 
-    if (!interceptList.includes(to.path)) {
+    if (!interceptList.includes(to.name)) {
 
     } else {
         if (!flag) {

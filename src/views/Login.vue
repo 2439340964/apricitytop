@@ -16,7 +16,8 @@
                         placeholder="请输入密码" @change="loginClick"/>
                 </div>
                 <div class="loginbtn">
-                    <el-button @click="loginClick" :loading="btnLoading" round color="#626aef">登录</el-button>
+                    <el-button @click="
+                        " :loading="btnLoading" round color="#626aef">登录</el-button>
                 </div>
             </div>
         </div>
