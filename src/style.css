@@ -41,6 +41,9 @@ body {
   justify-content: flex-end;
 }
 
+.flex-column {
+  flex-direction: column;
+}
 /* .el-row{
   margin: 0 !important;
 } */

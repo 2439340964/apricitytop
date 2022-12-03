@@ -14,6 +14,11 @@ export default [
         component: () => import('@/views/Home.vue'),
     },
     {
+        path: '/homepage',
+        name: 'homepage',
+        component: () => import('@/views/homepage/index.vue'),
+    },
+    {
         path: '/photo',
         name: 'photo',
         component: () => import('@/views/Photo.vue'),
