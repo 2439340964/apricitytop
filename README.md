@@ -1,7 +1,26 @@
-# Vue 3 + Vite
+# apricitytop
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+#### 介绍
+apricitytop H5网页
 
-## Recommended IDE Setup
+#### 说明
+基于vue3.0 + vite + pinia + eslint + three + elementUI + axios
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+#### Build Setup
+```
+# 克隆地址
+https://gitee.com/zeminga/apricitytop.git
+
+# 安装依赖
+npm install
+
+# 启动服务
+npm run dev
+```
+
+#### 发布
+npm run build
+
+#### 其他
+暂无其他，后续补充
+
